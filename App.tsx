@@ -1,33 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 
-import React from 'react';
-
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-
-
-function App(): React.JSX.Element {
-
+const App = () => {
   return (
-    <SafeAreaView>
-        <View>
-          <Text>HELLO!!!</Text>
-        </View>
-    </SafeAreaView>
-  );
+    <View>
+      <Text>Hello Shubhanshu </Text>
+    </View>
+  )
 }
 
-export default App;
+export default App
+
+const styles = StyleSheet.create({})
