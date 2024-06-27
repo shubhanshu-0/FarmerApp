@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const App = () => {
+const YourFarm = () => {
   return (
     <View>
-      <Text>Hello Shubhanshu </Text>
+      <Text>YourFarm</Text>
     </View>
   )
 }
 
-export default App
+export default YourFarm
 
 const styles = StyleSheet.create({})
