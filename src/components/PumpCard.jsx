@@ -54,7 +54,8 @@ export default PumpCard;
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#FFF',
-    padding: 20,
+    padding: 10,
+    margin:10,
     borderRadius: 10,
     marginBottom: 20,
     shadowColor: '#000',
