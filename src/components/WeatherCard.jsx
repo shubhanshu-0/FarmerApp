@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
 import Entypo from 'react-native-vector-icons/Entypo';
-
-
-//weather api
 import axios from 'axios';
 
 const API_KEY = '220c4c0c89bc6ffbcd0d52e1e63df148';
@@ -14,7 +10,6 @@ const getWeatherData = async (lat, lon) => {
   const response = await axios.get(`${API_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
   return response.data;
 };
-//
 
 const WeatherCard = () => {
   const [weather, setWeather] = useState(null);
@@ -43,6 +38,9 @@ const WeatherCard = () => {
     return <Text>Could not fetch weather data</Text>;
   }
 
+  // Convert temperature from Kelvin to Celsius
+  const temperatureInCelsius = weather.main.temp - 273.15;
+
   return (
     <View style={styles.card}>
       <View style={styles.header}>
@@ -51,7 +49,7 @@ const WeatherCard = () => {
       </View>
       <View style={styles.body}>
         <Entypo name="cloud" size={50} color="#FFFFFF" />
-        <Text style={styles.temperature}>{weather.main.temp}°C</Text>
+        <Text style={styles.temperature}>{temperatureInCelsius.toFixed(2)}°C</Text>
         <Text style={styles.city}>{weather.name}</Text>
       </View>
       <View style={styles.footer}>
@@ -103,3 +101,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 });
+
