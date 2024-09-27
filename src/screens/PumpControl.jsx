@@ -1,6 +1,6 @@
 // src/screens/PumpControl.jsx
 import React, { useState } from 'react';
-import { StyleSheet, View, ScrollView , TouchableOpacity , Text} from 'react-native';
+import { StyleSheet, View, ScrollView , TouchableOpacity , Text, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import PumpCard from '../components/PumpCard';
 import { pumpData } from '../Data/PumpData';
 import PumpInputModal from '../components/PumpInputModal'
@@ -42,15 +42,9 @@ const PumpControl = () => {
   
 
   return (
-    <View style = {styles.container}>
-      <View style = {styles.addControl}>
-          <TouchableOpacity
-            style={styles.addButton}
-            onPress={() => setModalVisible(true)}>
-            <Text>Add New Pump + </Text>
-          </TouchableOpacity>
-          <PumpInputModal modalVisible={modalVisible} setModalVisible = {setModalVisible} handleDataUpdate={handleDataUpdate}/>
-      </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style = {styles.container}>
+      
       <ScrollView style={styles.PumpContainer}>
         {data.map((pump) => (
           <PumpCard
@@ -64,7 +58,17 @@ const PumpControl = () => {
           />
         ))}
       </ScrollView>
+      {/* <View style = {styles.addControl}> */}
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={() => setModalVisible(true)}>
+            <Text>New Pump +</Text>
+            
+          </TouchableOpacity>
+          <PumpInputModal modalVisible={modalVisible} setModalVisible = {setModalVisible} handleDataUpdate={handleDataUpdate}/>
+      {/* </View> */}
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -75,22 +79,29 @@ const styles = StyleSheet.create({
     flex : 1,
     alignItems : 'center'
   },
-  addControl : {
-    width : '100%',
-    alignItems : 'center'
-  },
+  // addControl : {
+  //   width : '100%',
+  //   alignItems : 'center',
+  //   backgroundColor:'#F5FCFF'
+    
+    
+  // },
   PumpContainer: {
     flex: 1,
     padding: 20,
     backgroundColor: '#F5FCFF',
   },
   addButton: {
-    marginTop : 5,
-    backgroundColor: 'green',
+    position:'absolute',
+    top:20,
+    right:20,
+    // marginTop : 5,
+    backgroundColor: '#82C9FF',
     padding: 10,
-    elevation: 2,
-    width : '90%',
-    borderRadius : 50,
-    alignItems : 'center'
+    // elevation: 2,
+    width : 'Auto',
+    borderRadius : 10,
+    alignItems : 'center',
+    
   }
 });

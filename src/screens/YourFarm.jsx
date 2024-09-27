@@ -80,24 +80,28 @@ const YourFarmScreen = () => {
             <TextInput
               style={styles.input}
               placeholder="Farm Name"
+              placeholderTextColor="#000"
               value={newFarm.name}
               onChangeText={(text) => setNewFarm({ ...newFarm, name: text })}
             />
             <TextInput
               style={styles.input}
               placeholder="Location"
+              placeholderTextColor="#000"
               value={newFarm.location}
               onChangeText={(text) => setNewFarm({ ...newFarm, location: text })}
             />
             <TextInput
               style={styles.input}
               placeholder="Area"
+              placeholderTextColor="#000"
               value={newFarm.area}
               onChangeText={(text) => setNewFarm({ ...newFarm, area: text })}
             />
             <TextInput
               style={styles.input}
               placeholder="Crop"
+              placeholderTextColor="#000"
               value={newFarm.crop}
               onChangeText={(text) => setNewFarm({ ...newFarm, crop: text })}
             />
@@ -128,16 +132,17 @@ const styles = StyleSheet.create({
   addButton: {
     position: 'absolute',
     bottom: 20,
-    right: 20,
+    right: 45,
     backgroundColor: '#008B38',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
+    paddingVertical: 10,
+    marginLeft:20,
+    paddingHorizontal: 20,
+    borderRadius: 6,
     elevation: 3,
   },
   addButtonText: {
     color: '#FFF',
-    fontSize: 16,
+    fontSize: 13,
     fontWeight: 'bold',
   },
   modalContainer: {
@@ -162,30 +167,34 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 15,
+    paddingTop:10,
     textAlign: 'center',
+    color:'#000',
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#CCC',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 15,
-    width: '100%',
-    backgroundColor:'#d3d3d3',
-    color:'#000',
+    borderBottomWidth: 1,
+    borderColor: '#000',
+    // padding: 8,
+    // marginBottom: 10,
+    // lineHeight:10,
+    paddingBottom:0,
+    paddingTop:30,
+    width: '90%',
+    backgroundColor: '#fff',
+    color: '#000',
     
   },
   cancelButton: {
     backgroundColor: '#FF6347',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    marginTop: 10,
-    marginLeft:-150,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 6,
+    marginTop: 50,
+    marginLeft:-110,
   },
   cancelButtonText: {
     color: '#FFF',
-    fontSize: 16,
+    fontSize: 13,
     fontWeight: 'bold',
   },
 });
