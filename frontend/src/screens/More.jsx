@@ -1,17 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const Kuchbhi = () => {
+const More = () => {
   return (
     <View style = {styles.bigb}>
       <View style={styles.container}>
-      <Text style={styles.text}>Kuch bhi</Text>
+      <Text style={styles.text}>More</Text>
       </View>
     </View>
   )
 }
 
-export default Kuchbhi
+export default More
 
 const styles = StyleSheet.create({
   text:{

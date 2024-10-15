@@ -23,7 +23,7 @@ const HomeScreen = ({ navigation }) => {
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate("YourFarm")} style={styles.serviceBox}>
               <MaterialCommunityIcons name="island" size={32} color="#000" />
-              <Text style={styles.serviceText}>Your Farm</Text>
+              <Text style={styles.serviceText}>Your Farms</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.services}>
@@ -31,9 +31,9 @@ const HomeScreen = ({ navigation }) => {
               <FontAwesome name="newspaper-o" size={30} color="#000" />
               <Text style={styles.serviceText}>News</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Kuchbhi")} style={styles.serviceBox}>
+            <TouchableOpacity onPress={() => navigation.navigate("More")} style={styles.serviceBox}>
               <FontAwesome name="question" size={30} color="#000" />
-              <Text style={styles.serviceText}>Kuch bbhi</Text>
+              <Text style={styles.serviceText}>More</Text>
             </TouchableOpacity>
           </View>
         </View>

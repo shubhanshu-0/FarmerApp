@@ -7,7 +7,7 @@ import HomeScreen from './screens/Farmer/HomeScreen';
 import PumpControl from './screens/Farmer/PumpControl';
 import YourFarm from './screens/Farmer/YourFarm';
 import News from './screens/News';
-import Kuchbhi from './screens/Kuchbhi';
+import More from './screens/More';
 import SettingsScreen from './screens/SettingsScreen';
 import EntryScreen from './screens/EntryScreen';
 import OTPScreen from './screens/OTPScreen';
@@ -26,7 +26,7 @@ const HomeStack = () => (
     <Stack.Screen name="PumpControl" component={PumpControl} />
     <Stack.Screen name="YourFarm" component={YourFarm} />
     <Stack.Screen name="News" component={News} />
-    <Stack.Screen name="Kuchbhi" component={Kuchbhi} />
+    <Stack.Screen name="More" component={More} />
   </Stack.Navigator>
 );
 
