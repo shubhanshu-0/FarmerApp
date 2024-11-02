@@ -1,6 +1,5 @@
 const Farm = require('../models/farm');
 
-// Add a farm
 exports.addFarm = async (req, res) => {
     const { name, location, address } = req.body;
     const { userId } = req.params;
@@ -14,7 +13,6 @@ exports.addFarm = async (req, res) => {
     }
 };
 
-// Get all farms for a user
 exports.getFarms = async (req, res) => {
     const { userId } = req.params;
 

@@ -1,10 +1,8 @@
-// /routes/admin/adminRoutes.js
 const express = require('express');
 const router = express.Router();
 const Farms = require('../../models/farm');
 const Secretary = require('../../models/secretary');
 
-// Route to get all farmers
 router.get('/farmers', async (req, res) => {
     try {
         const farmers = await Farmer.find();
@@ -14,7 +12,6 @@ router.get('/farmers', async (req, res) => {
     }
 });
 
-// Route to get all secretaries
 router.get('/secretaries/:id/farms', async (req, res) => {
     const secretaryId = req.params.id;
 

@@ -5,7 +5,7 @@ const farmSchema = new mongoose.Schema({
     pincode : {type : String , required : true},
     location: { type: String, required: true },
     address: { type: String, required: true },
-    farmerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Farmer', required: true }, // Reference to the Farmer model
+    farmerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Farmer', required: true }, 
     pump : [{ type: mongoose.Schema.Types.ObjectId , ref: 'Pump' }]
 }, { timestamps: true }); // Adding timestamps for createdAt and updatedAt
 

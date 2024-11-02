@@ -14,8 +14,8 @@ const OTPScreen = ({ route, navigation , userType}) => {
     if (otp === '1234') {
       // now search in database for the user
       // if exist --> maintabs for usertype = {userType}
-      // navigation.navigate("MainTabs");
-      navigation.navigate('SignUp');
+      navigation.navigate("MainTabs");
+      // navigation.navigate('SignUp');
       //else signup page
     } else {
       setError('Invalid OTP. Please try again or Sign Up.');
