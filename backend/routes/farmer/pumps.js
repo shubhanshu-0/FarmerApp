@@ -1,14 +1,14 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const Pump = require('../../models/pump'); 
 const Farm = require('../../models/farm');
-const isAuthenticated = require('../../middlewares/authMiddleware');
+const farms = require('../farmer/farms');
 
 // router.use(authMiddleware);
 
 router.get('/' ,  async (req , res) => {
     const farmId = req.params.farmId;
-
+    console.log(farmId);
     try {
         const pumps = await Pump.find({ farmId: farmId});
         res.status(200).json(pumps);
@@ -18,17 +18,17 @@ router.get('/' ,  async (req , res) => {
 })
 
 router.post('/add' , async (req, res) => {   
-    const { pumpId } = req.body;
+    const { pumpId } = req.body
     const farmId = req.params.farmId;
+    console.log(farmId);
     try {
-        const newPump = new Pump({
+        const newPump = await Pump.create({
             pumpId ,
             farmId ,
             status : false , 
-            farmerId: req.session.userId, 
         });
 
-        await newPump.save();
+        // await newPump.save();
         res.status(201).json({ message: 'Pump added successfully', pump: newPump });
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });

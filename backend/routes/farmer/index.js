@@ -6,8 +6,8 @@ const farmRoutes = require('./farms');
 const pumpRoutes = require('./pumps');
 
 router.use('/home', home);         
-router.use('/farms', farmRoutes);     
+router.use('/farms', farmRoutes);    
+router.use('/:farmId/pumps', pumpRoutes);
 // router.use('/pump', pumpRoutes);        
-// router.use('/pumpcontrol', controlPumpRoutes); 
 
 module.exports = router;
