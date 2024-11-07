@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Farm = require('../../models/farm'); //model
-const isAuthenticated = require('../../middlewares/authMiddleware');
 const pumpRoutes = require('../farmer/pumps')
 
-// router.use(authMiddleware);   
+
 
 router.get('/' , async (req, res) => {
     try {
@@ -34,6 +33,6 @@ router.post('/add' , async (req, res) => {
     }
 });
 
-router.use('/:farmId/pumps', pumpRoutes);   
+router.use('/:farmId/pumps', pumpRoutes); 
 
 module.exports = router;
