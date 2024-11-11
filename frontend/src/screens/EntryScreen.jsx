@@ -1,17 +1,44 @@
-// src/screens/EntryScreen.jsx
-
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  TouchableOpacity, 
+  StyleSheet, 
+  Image, 
+  KeyboardAvoidingView, 
+  Platform, 
+  TouchableWithoutFeedback, 
+  Keyboard, 
+  Alert 
+} from 'react-native';
 
 const ENTRY_IMAGE = require('../assets/images/login.png');
 
-const EntryScreen = ({ navigation , userType}) => {
+const EntryScreen = ({ navigation, userType }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [error, setError] = useState('');
 
-  // receive the usertype and send to otp page - todo
+  // Function to validate phone number length
+  const isValidPhoneNumber = (number) => number.length === 10;
+
   const handleGetOtp = () => {
-    console.log('Sending OTP to :', phoneNumber);
-    navigation.navigate('OTP', { phoneNumber , userType });
+    if (isValidPhoneNumber(phoneNumber)) {
+      console.log('Sending OTP to:', phoneNumber);
+      navigation.navigate('OTP', { phoneNumber, userType });
+    } else {
+      Alert.alert('Invalid Phone Number', 'Please enter a valid 10-digit mobile number.');
+    }
+  };
+
+  const handlePhoneNumberChange = (text) => {
+    // Only allow numeric input
+    if (/^\d*$/.test(text)) {
+      setPhoneNumber(text);
+      setError(''); // Clear error if input is valid
+    } else {
+      setError('Please enter numbers only');
+    }
   };
 
   return (
@@ -30,9 +57,11 @@ const EntryScreen = ({ navigation , userType}) => {
               placeholder="Enter your mobile number"
               placeholderTextColor="#000"
               value={phoneNumber}
-              onChangeText={setPhoneNumber}
+              onChangeText={handlePhoneNumberChange}
               keyboardType="phone-pad"
+              maxLength={10} // Limit input length to 10 digits
             />
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
             <TouchableOpacity style={styles.button} onPress={handleGetOtp}>
               <Text style={styles.buttonText}>Get OTP to Login</Text>
             </TouchableOpacity>
@@ -77,11 +106,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '90%',
     borderWidth: 1,
-    borderRadius: 10,
   },
   buttonText: {
     color: '#008B38',
     borderColor: '#000',
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: 10,
   },
 });
 
