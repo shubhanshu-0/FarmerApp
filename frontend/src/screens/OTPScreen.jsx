@@ -18,13 +18,19 @@ const OTPScreen = ({ route, navigation, userType }) => {
   const { phoneNumber } = route.params;
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
+  const [isRegistered, setIsRegistered] = useState(true);
 
   const handleOtpVerification = () => {
-    if (otp === '1234') {
+    if (otp === '1234' ) {
       // Search in database for the user based on userType
-      navigation.navigate('MainTabs');
+       if(isRegistered){
+         navigation.navigate('MainTabs')
+       } else{
+         navigation.navigate('SignUp');
+       }
+     
     } else {
-      setError('Invalid OTP. Please try again or Sign Up.');
+      setError('Please try again.');
     }
   };
 
@@ -70,9 +76,9 @@ const OTPScreen = ({ route, navigation, userType }) => {
               <TouchableOpacity style={styles.button} onPress={handleOtpVerification}>
                 <Text style={styles.buttonText}>Submit</Text>
               </TouchableOpacity>
-              <Text style={styles.or}>or</Text>
+             
               <TouchableOpacity onPress={handleSignUp}>
-                <Text style={styles.buttonText2}>Sign Up</Text>
+                {/* <Text style={styles.buttonText2}>Sign Up</Text> */}
               </TouchableOpacity>
             </View>
           </View>
