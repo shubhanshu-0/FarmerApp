@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Farmer = require('../models/farmer'); 
 const Secretary = require('../models/secretary');
-const Admin = require('../models/Admin'); 
+const Admin = require('../models/admin'); 
 
 const sendOtp = (mobileNumber) => {
     console.log(`Sending OTP to ${mobileNumber}`);
@@ -23,7 +23,7 @@ router.post('/select-user-type', (req, res) => {
 
 router.post('/enter-mobile', (req, res) => {
     const { mobileNumber } = req.body;
-    const userType = req.session.userType;
+    // const userType = req.session.userType;
     req.session.mobileNumber = mobileNumber;
     if (!mobileNumber) {
         return res.status(400).json({ message: 'Mobile number is required.' });
@@ -62,12 +62,12 @@ router.post('/verify-otp', async (req, res) => {
         }
 
         if (user) {
-            req.session.userId = user._id; // Store user ID in session
+            req.session.userId = user._id;
             req.session.mobileNumber = user.mobileNumber;
             return res.json({ redirectUrl: `/api/${userType}/home` });
         } else {
             return res.json({ redirectUrl: `/api/${userType}/signup` });
-        }
+        }     
     } else {
         return res.status(400).json({ message: 'Invalid OTP' });
     }

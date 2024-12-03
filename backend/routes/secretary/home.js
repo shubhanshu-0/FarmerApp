@@ -5,14 +5,14 @@ const Secretary = require('../../models/secretary');
 const Farm = require('../../models/farm');
 
 router.get('/' , (req , res) => {
-    res.send('SEE FARMS AT YOUR SUPERVISION');
+    res.send('Welcome to Home !');
 })
 
 router.get('/farms', async (req, res) => {
-    const secretaryId = req.secretaryId;
+    const secretaryId = req.session.userId;
 
     try {
-        const secretary = await Secretary.findById(secretaryId);
+        const secretary = await Secretary.findOne(secretaryId);
         
         if (!secretary) {
             return res.status(404).json({ message: 'Secretary not found' });
@@ -20,15 +20,14 @@ router.get('/farms', async (req, res) => {
 
         const areaPinCode = secretary.areaInControl.pinCode;
 
-        const farms = await Farm.find({ location: areaPinCode })
-            .populate('farmerId') 
-            .exec();
+        const farms = await Farm.find({ location: areaPinCode });
+            // .populate('farmerId') 
+            // .exec();
 
         if (farms.length === 0) {
             return res.status(404).json({ message: 'No farms found for this area' });
         }
 
-        // Prepare a response object with farm and farmer details
         const farmDetails = farms.map(farm => ({
             farmName: farm.name,
             location: farm.location,
