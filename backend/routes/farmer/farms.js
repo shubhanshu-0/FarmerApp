@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Farm = require('../../models/farm'); //model
+const Farm = require('../../models/farm');
 const pumpRoutes = require('../farmer/pumps')
-
-
 
 router.get('/' , async (req, res) => {
     try {
-        const farms = await Farm.find({ farmerId: req.user._id }).populate('farmerId');
+        const farms = await Farm.find({ farmerId: req.user._id }).populate('farmerId'); // req.user._id = req.userId
         res.status(200).json(farms); // display in frontend
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
@@ -32,6 +30,13 @@ router.post('/add' , async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+router.delete('/:farmId' , async(req , res) => {
+    const {farmId} = req.params.farmId;
+
+    await Farm.delete({_id : farmId});
+    
+})
 
 router.use('/:farmId/pumps', pumpRoutes); 
 

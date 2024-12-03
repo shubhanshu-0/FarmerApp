@@ -1,29 +1,46 @@
-// src/screens/OTPScreen.js
-
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 
 const ENTRY_IMAGE = require('../assets/images/otp.png');
 
-const OTPScreen = ({ route, navigation , userType}) => {
+const OTPScreen = ({ route, navigation, userType }) => {
   const { phoneNumber } = route.params;
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
+  const [isRegistered, setIsRegistered] = useState(true);
 
   const handleOtpVerification = () => {
-    if (otp === '1234') {
-      // now search in database for the user
-      // if exist --> maintabs for usertype = {userType}
-      navigation.navigate("MainTabs");
-      // navigation.navigate('SignUp');
-      //else signup page
+    if (otp === '1234' ) {
+      // Search in database for the user based on userType
+       if(isRegistered){
+         navigation.navigate('MainTabs')
+       } else{
+         navigation.navigate('SignUp');
+       }
+     
     } else {
-      setError('Invalid OTP. Please try again or Sign Up.');
+      setError('Please try again.');
     }
   };
 
   const handleSignUp = () => {
     navigation.navigate('SignUp');
+  };
+
+  const handleOtpChange = (text) => {
+    const newOtp = text.replace(/[^0-9]/g, '').slice(0, 4); // Limit to 4 digits
+    setOtp(newOtp);
   };
 
   return (
@@ -38,31 +55,30 @@ const OTPScreen = ({ route, navigation , userType}) => {
           </View>
           <View style={styles.contentContainer}>
             <Text style={styles.label}>OTP Verification</Text>
-            <Text style={styles.info}>Please enter the one-time password sent to your mobile number: {phoneNumber}</Text>
+            <Text style={styles.info}>
+              Please enter the one-time password sent to your mobile number: {phoneNumber}
+            </Text>
             <View style={styles.otpContainer}>
-              {['0', '1', '2', '3'].map((_, i) => (
-                <TextInput
-                  key={i}
-                  style={styles.otpInput}
-                  keyboardType="number-pad"
-                  maxLength={1}
-                  value={otp[i] || ''}
-                  onChangeText={(text) => {
-                    const newOtp = otp.split('');
-                    newOtp[i] = text;
-                    setOtp(newOtp.join(''));
-                  }}
-                />
-              ))}
+              <TextInput
+                style={styles.otpInput}
+                keyboardType="number-pad"
+                maxLength={4}
+                value={otp}
+                onChangeText={handleOtpChange}
+                placeholder="••••"
+                placeholderTextColor="#ccc"
+                textAlign="center"
+                autoFocus
+              />
             </View>
             {error ? <Text style={styles.error}>{error}</Text> : null}
             <View style={styles.buttonContainer}>
               <TouchableOpacity style={styles.button} onPress={handleOtpVerification}>
                 <Text style={styles.buttonText}>Submit</Text>
               </TouchableOpacity>
-              <Text style={styles.or}>or</Text>
+             
               <TouchableOpacity onPress={handleSignUp}>
-                <Text style={styles.buttonText2}>Sign Up</Text>
+                {/* <Text style={styles.buttonText2}>Sign Up</Text> */}
               </TouchableOpacity>
             </View>
           </View>
@@ -90,8 +106,8 @@ const styles = StyleSheet.create({
   image: {
     width: 500,
     height: 500,
-    top:50,
-    left:40,
+    top: 50,
+    left: 40,
     resizeMode: 'contain',
   },
   contentContainer: {
@@ -115,20 +131,21 @@ const styles = StyleSheet.create({
   },
   otpContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     marginBottom: 20,
   },
   otpInput: {
-    width: 40,
-    height: 40,
-    borderWidth: 0.5,
-    borderColor: '#008B38',
-    borderRadius: 5,
-    textAlign: 'center',
-    fontSize: 18,
+    width: '40%',
+    height: 50,
+    fontSize: 20,
+    letterSpacing: 5,
+    borderBottomWidth: 1, // Set only bottom border width
+    borderBottomColor: '#008B38', // Set the underline color
+    paddingHorizontal: 15,
     color: '#000',
-    marginHorizontal: 5,
+    textAlign: 'center', // Center text for OTP input
   },
+  
   error: {
     color: 'red',
     marginBottom: 20,

@@ -4,10 +4,10 @@ const router = express.Router();
 const Farmer = require('../../models/farmer.js');
 
 router.post('/signup', async (req, res) => {
-    const { name, email , city , pincode , residentialAddress } = req.body;
+    const { name, city , pincode , residentialAddress } = req.body;
     const mobileNumber = req.session.mobileNumber;
 
-    if (!name || !mobileNumber || !email ) {
+    if (!name || !mobileNumber) {
         return res.status(400).json({ message: 'All fields are required.' });
     }
 
@@ -20,7 +20,6 @@ router.post('/signup', async (req, res) => {
         const newFarmer = new Farmer({
             name,
             mobileNumber,
-            email,
             city,
             pincode ,
             residentialAddress,

@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 const auth = require('./routes/auth.js');
 
 const farmerSignupRoute = require('./routes/farmer/signup');
-// const secretarySignupRoute = require('./routes/secretary/signup');
-// const adminSignupRoute = require('./routes/admin/signup');
+const secretarySignupRoute = require('./routes/secretary/signup');
+const adminSignupRoute = require('./routes/admin/signup');
 
 
-const farmerRoutes = require('./routes/farmer/index.js');
-const secretaryRoutes = require('./routes/secretary/index.js'); // Added Secretary Routes
-const adminRoutes = require('./routes/admin/index.js'); // Added Admin Routes
+// const farmerRoutes = require('./routes/farmer/index.js');
+// const secretaryRoutes = require('./routes/secretary/index.js'); 
+// const adminRoutes = require('./routes/admin/index.js'); 
 
 const app = express();
 const connectDB = require('./config/db.js');
@@ -35,8 +35,8 @@ connectDB();
 app.use('/api/auth', auth);
 
 app.use('/api/farmer', farmerSignupRoute);
-// app.use('/api/secretary', secretarySignupRoutes);
-// app.use('/api/admin', adminSignupRoutes);
+app.use('/api/secretary', secretarySignupRoute);
+app.use('/api/admin', adminSignupRoute);
 
 app.use('/api/farmer', isAuthenticated, require('./routes/farmer/index'));
 app.use('/api/secretary',isAuthenticated, require('./routes/secretary/index'));
