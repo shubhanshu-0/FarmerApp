@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }) => {
         <Text style={styles.sectionTitle}>Our Services</Text>
         <View style={styles.row2}>
           <View style={styles.services}>
-            <TouchableOpacity onPress={() => navigation.navigate("PumpControl")} style={styles.serviceBox}>
+            <TouchableOpacity onPress={() => navigation.navigate("NumPump")} style={styles.serviceBox}>
               <MaterialCommunityIcons name="water-pump" size={28} color="#000" />
               <Text style={styles.serviceText}>Pump Control</Text>
             </TouchableOpacity>

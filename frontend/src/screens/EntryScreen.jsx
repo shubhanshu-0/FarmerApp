@@ -15,27 +15,27 @@ import {
 
 const ENTRY_IMAGE = require('../assets/images/login.png');
 
-const EntryScreen = ({ navigation, userType }) => {
+const EntryScreen = ({ route, navigation }) => {
+  const { userType } = route.params || {}; // Extract userType from route params
   const [phoneNumber, setPhoneNumber] = useState('');
   const [error, setError] = useState('');
 
-  // Function to validate phone number length
+  // Validate phone number length
   const isValidPhoneNumber = (number) => number.length === 10;
 
   const handleGetOtp = () => {
     if (isValidPhoneNumber(phoneNumber)) {
       console.log('Sending OTP to:', phoneNumber);
-      navigation.navigate('OTP', { phoneNumber, userType });
+      navigation.navigate('OTP', { phoneNumber, userType }); // Pass phoneNumber and userType to OTP screen
     } else {
       Alert.alert('Invalid Phone Number', 'Please enter a valid 10-digit mobile number.');
     }
   };
 
   const handlePhoneNumberChange = (text) => {
-    // Only allow numeric input
     if (/^\d*$/.test(text)) {
       setPhoneNumber(text);
-      setError(''); // Clear error if input is valid
+      setError(''); // Clear error
     } else {
       setError('Please enter numbers only');
     }
@@ -59,7 +59,7 @@ const EntryScreen = ({ navigation, userType }) => {
               value={phoneNumber}
               onChangeText={handlePhoneNumberChange}
               keyboardType="phone-pad"
-              maxLength={10} // Limit input length to 10 digits
+              maxLength={10}
             />
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
             <TouchableOpacity style={styles.button} onPress={handleGetOtp}>
@@ -73,21 +73,9 @@ const EntryScreen = ({ navigation, userType }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 30,
-  },
-  imageContainer: {
-    flex: 1,
-    alignItems: 'center',
-    paddingTop: 100,
-  },
-  image: {
-    width: 300,
-    height: 300,
-    resizeMode: 'contain',
-  },
+  container: { flex: 1, alignItems: 'center', padding: 30 },
+  imageContainer: { flex: 1, alignItems: 'center', paddingTop: 100 },
+  image: { width: 300, height: 300, resizeMode: 'contain' },
   input: {
     width: '90%',
     padding: 10,
@@ -99,22 +87,9 @@ const styles = StyleSheet.create({
     color: '#000',
     textAlign: 'center',
   },
-  button: {
-    padding: 14,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '90%',
-    borderWidth: 1,
-  },
-  buttonText: {
-    color: '#008B38',
-    borderColor: '#000',
-  },
-  errorText: {
-    color: 'red',
-    marginBottom: 10,
-  },
+  button: { padding: 14, borderRadius: 10, alignItems: 'center', justifyContent: 'center', width: '90%', borderWidth: 1 },
+  buttonText: { color: '#008B38' },
+  errorText: { color: 'red', marginBottom: 10 },
 });
 
 export default EntryScreen;
